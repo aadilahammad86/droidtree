@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Outer Arc Ring: Primary Base Sector (Bottom-Left) -->
+    <path
+        android:pathData="M 54.00,87.00 A 33,33 0 0,1 22.99,42.71"
+        android:strokeWidth="7"
+        android:strokeLineCap="round">
+        <aapt:attr name="android:strokeColor">
+            <gradient
+                android:type="linear"
+                android:startX="23"
+                android:startY="42"
+                android:endX="54"
+                android:endY="87">
+                <item android:color="#FF60A5FA" android:offset="0.0" />
+                <item android:color="#FF2563EB" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Outer Arc Ring: Top-Left Arch (Receives primary light) -->
+    <path
+        android:pathData="M 26.97,35.07 A 33,33 0 0,1 77.33,30.67"
+        android:strokeWidth="7"
+        android:strokeLineCap="round">
+        <aapt:attr name="android:strokeColor">
+            <gradient
+                android:type="linear"
+                android:startX="27"
+                android:startY="35"
+                android:endX="77"
+                android:endY="30">
+                <item android:color="#FFE0F2FE" android:offset="0.0" />
+                <item android:color="#FF93C5FD" android:offset="0.5" />
+                <item android:color="#FF3B82F6" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Outer Arc Ring: Top-Right Apex before Aperture -->
+    <path
+        android:pathData="M 82.58,37.50 A 33,33 0 0,1 83.91,67.95"
+        android:strokeWidth="7"
+        android:strokeLineCap="round">
+        <aapt:attr name="android:strokeColor">
+            <gradient
+                android:type="linear"
+                android:startX="82"
+                android:startY="37"
+                android:endX="84"
+                android:endY="68">
+                <item android:color="#FFFFFFFF" android:offset="0.0" />
+                <item android:color="#FF60A5FA" android:offset="0.6" />
+                <item android:color="#FF1D4ED8" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Inner Partition Ring: Arc 1 -->
+    <path
+        android:pathData="M 47.16,72.79 A 20,20 0 1,1 66.86,38.68"
+        android:strokeWidth="6"
+        android:strokeLineCap="round">
+        <aapt:attr name="android:strokeColor">
+            <gradient
+                android:type="linear"
+                android:startX="47"
+                android:startY="73"
+                android:endX="67"
+                android:endY="39">
+                <item android:color="#FF93C5FD" android:offset="0.0" />
+                <item android:color="#FF3B82F6" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Inner Partition Ring: Arc 2 -->
+    <path
+        android:pathData="M 71.32,44.00 A 20,20 0 0,1 54.00,74.00"
+        android:strokeWidth="6"
+        android:strokeLineCap="round">
+        <aapt:attr name="android:strokeColor">
+            <gradient
+                android:type="linear"
+                android:startX="71"
+                android:startY="44"
+                android:endX="54"
+                android:endY="74">
+                <item android:color="#FF3B82F6" android:offset="0.0" />
+                <item android:color="#FF1D4ED8" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Specular Light Sheen Highlight -->
+    <path
+        android:pathData="M 33.00,32.00 A 33,33 0 0,1 72.00,29.00"
+        android:strokeColor="#99FFFFFF"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round" />
+
+    <!-- Central Storage Iris Nucleus / Lens -->
+    <path
+        android:pathData="M 54,46.5 A 7.5,7.5 0 1,1 53.99,46.5 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:type="radial"
+                android:centerX="52.5"
+                android:centerY="52"
+                android:gradientRadius="7.5">
+                <item android:color="#FFFFFFFF" android:offset="0.0" />
+                <item android:color="#FF93C5FD" android:offset="0.3" />
+                <item android:color="#FF3B82F6" android:offset="0.7" />
+                <item android:color="#FF1D4ED8" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Lens Specular Glint -->
+    <path
+        android:pathData="M 52.2,51 A 1.8,1.2 0 1,1 52.19,51 Z"
+        android:fillColor="#E6FFFFFF" />
+
+</vector>

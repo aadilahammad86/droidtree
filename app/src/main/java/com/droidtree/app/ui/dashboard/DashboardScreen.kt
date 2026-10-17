@@ -19,24 +19,25 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountTree
 import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.filled.Folder
+import androidx.compose.material.icons.filled.Palette
 import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -45,7 +46,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
@@ -53,11 +53,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import com.droidtree.app.core.designsystem.components.FluidCard
 import com.droidtree.app.core.designsystem.components.StorageGaugeRing
+import com.droidtree.app.core.designsystem.components.StorageIrisLogo
+import com.droidtree.app.core.designsystem.components.ThemeCustomizationBottomSheet
 import com.droidtree.app.core.designsystem.components.ToastBanner
 import com.droidtree.app.core.designsystem.components.ToastType
 import com.droidtree.app.core.designsystem.motion.fluidPress
-import com.droidtree.app.core.designsystem.theme.DroidDarkBackground
-import com.droidtree.app.core.designsystem.theme.DroidPrimary
 import com.droidtree.app.core.model.FileNode
 import com.droidtree.app.core.model.StorageCategory
 import org.koin.androidx.compose.koinViewModel
@@ -96,13 +96,27 @@ fun DashboardScreen(
 /**
  * Pure previewable content composable receiving only state and actions.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DashboardContent(
     uiState: DashboardUiState,
     actions: DashboardActions
 ) {
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+
+    if (uiState.isThemeSheetVisible) {
+        ThemeCustomizationBottomSheet(
+            sheetState = sheetState,
+            currentThemeMode = uiState.themeMode,
+            currentColorPalette = uiState.colorPalette,
+            onSelectThemeMode = { actions.onSelectThemeMode(it) },
+            onSelectColorPalette = { actions.onSelectColorPalette(it) },
+            onDismissRequest = { actions.onCloseThemeSheet() }
+        )
+    }
+
     Scaffold(
-        containerColor = DroidDarkBackground,
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             Row(
                 modifier = Modifier
@@ -112,28 +126,45 @@ fun DashboardContent(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Column {
-                    Text(
-                        text = "DroidTree",
-                        style = MaterialTheme.typography.displayMedium,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
-                    Text(
-                        text = "WizTree Disk Analyzer",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    StorageIrisLogo(size = 38.dp)
+                    Spacer(modifier = Modifier.width(14.dp))
+                    Column {
+                        Text(
+                            text = "DroidTree",
+                            style = MaterialTheme.typography.displayMedium,
+                            color = MaterialTheme.colorScheme.onBackground
+                        )
+                        Text(
+                            text = "WizTree Disk Analyzer",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
                 }
 
-                IconButton(
-                    onClick = { actions.onExportPdfReportClick() },
-                    modifier = Modifier.fluidPress()
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Download,
-                        contentDescription = "Export PDF Report",
-                        tint = DroidPrimary
-                    )
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    IconButton(
+                        onClick = { actions.onOpenThemeSheet() },
+                        modifier = Modifier.fluidPress()
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Palette,
+                            contentDescription = "Themes and Palettes",
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
+
+                    IconButton(
+                        onClick = { actions.onExportPdfReportClick() },
+                        modifier = Modifier.fluidPress()
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Download,
+                            contentDescription = "Export PDF Report",
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
                 }
             }
         }
@@ -176,7 +207,7 @@ fun DashboardContent(
                                 .fillMaxWidth()
                                 .height(6.dp)
                                 .clip(RoundedCornerShape(3.dp)),
-                            color = DroidPrimary
+                            color = MaterialTheme.colorScheme.primary
                         )
                         Spacer(modifier = Modifier.height(6.dp))
                         Text(
@@ -196,7 +227,7 @@ fun DashboardContent(
                         .fluidPress(pressedScale = 0.98f),
                     enabled = !uiState.isScanning,
                     shape = RoundedCornerShape(14.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = DroidPrimary)
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
                 ) {
                     if (uiState.isScanning) {
                         CircularProgressIndicator(
@@ -300,7 +331,7 @@ fun ActionTile(
             Icon(
                 imageVector = icon,
                 contentDescription = null,
-                tint = DroidPrimary,
+                tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.size(24.dp)
             )
             Column {
@@ -338,11 +369,19 @@ fun CategoryRow(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Box(
                     modifier = Modifier
-                        .size(12.dp)
-                        .clip(CircleShape)
-                        .background(category.color)
-                )
-                Spacer(modifier = Modifier.width(12.dp))
+                        .size(36.dp)
+                        .clip(RoundedCornerShape(10.dp))
+                        .background(category.color.copy(alpha = 0.16f)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = category.icon,
+                        contentDescription = null,
+                        tint = category.color,
+                        modifier = Modifier.size(20.dp)
+                    )
+                }
+                Spacer(modifier = Modifier.width(14.dp))
                 Text(
                     text = category.displayName,
                     style = MaterialTheme.typography.bodyLarge,

@@ -20,11 +20,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.InsertDriveFile
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
@@ -61,10 +59,7 @@ import com.droidtree.app.core.designsystem.components.ToastBanner
 import com.droidtree.app.core.designsystem.components.ToastType
 import com.droidtree.app.core.designsystem.components.TreemapCanvas
 import com.droidtree.app.core.designsystem.motion.fluidPress
-import com.droidtree.app.core.designsystem.theme.DroidDarkBackground
-import com.droidtree.app.core.designsystem.theme.DroidDarkSurface
 import com.droidtree.app.core.designsystem.theme.DroidError
-import com.droidtree.app.core.designsystem.theme.DroidPrimary
 import com.droidtree.app.core.model.FileNode
 import org.koin.androidx.compose.koinViewModel
 
@@ -109,7 +104,7 @@ fun TreemapContent(
     val bottomSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
     Scaffold(
-        containerColor = DroidDarkBackground,
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             Column(
                 modifier = Modifier
@@ -128,7 +123,7 @@ fun TreemapContent(
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Back",
-                            tint = Color.White
+                            tint = MaterialTheme.colorScheme.onBackground
                         )
                     }
 
@@ -138,7 +133,7 @@ fun TreemapContent(
                         Text(
                             text = uiState.currentRoot?.name ?: "Treemap Explorer",
                             style = MaterialTheme.typography.titleLarge,
-                            color = Color.White
+                            color = MaterialTheme.colorScheme.onBackground
                         )
                         Text(
                             text = uiState.currentRoot?.formattedSize ?: "",
@@ -161,7 +156,7 @@ fun TreemapContent(
                         Text(
                             text = node.name,
                             style = MaterialTheme.typography.bodyMedium,
-                            color = if (node == uiState.currentRoot) DroidPrimary else Color.LightGray,
+                            color = if (node == uiState.currentRoot) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
                             modifier = Modifier
                                 .fluidPress { actions.onBreadcrumbClick(node) }
                                 .padding(vertical = 4.dp, horizontal = 4.dp)
@@ -170,7 +165,7 @@ fun TreemapContent(
                             Icon(
                                 imageVector = Icons.Default.ChevronRight,
                                 contentDescription = null,
-                                tint = Color.Gray,
+                                tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
                                 modifier = Modifier.size(16.dp)
                             )
                         }
@@ -231,12 +226,12 @@ fun TreemapContent(
                                 Text(
                                     text = "Contents (${root.children.size})",
                                     style = MaterialTheme.typography.titleMedium,
-                                    color = Color.White
+                                    color = MaterialTheme.colorScheme.onSurface
                                 )
                                 Text(
                                     text = root.formattedSize,
                                     style = MaterialTheme.typography.bodyMedium,
-                                    color = DroidPrimary
+                                    color = MaterialTheme.colorScheme.primary
                                 )
                             }
 
@@ -283,7 +278,7 @@ fun TreemapContent(
                     Text(
                         text = "Folder is empty",
                         style = MaterialTheme.typography.bodyLarge,
-                        color = Color.Gray
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }
@@ -304,7 +299,7 @@ fun TreemapContent(
                 ModalBottomSheet(
                     onDismissRequest = { actions.onDismissDetails() },
                     sheetState = bottomSheetState,
-                    containerColor = DroidDarkSurface
+                    containerColor = MaterialTheme.colorScheme.surface
                 ) {
                     Column(
                         modifier = Modifier
@@ -319,10 +314,14 @@ fun TreemapContent(
                             Text(
                                 text = node.name,
                                 style = MaterialTheme.typography.titleLarge,
-                                color = Color.White
+                                color = MaterialTheme.colorScheme.onSurface
                             )
                             IconButton(onClick = { actions.onDismissDetails() }) {
-                                Icon(Icons.Default.Close, contentDescription = "Close", tint = Color.Gray)
+                                Icon(
+                                    Icons.Default.Close,
+                                    contentDescription = "Close",
+                                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
                             }
                         }
 
@@ -349,7 +348,7 @@ fun TreemapContent(
                         ) {
                             Icon(Icons.Default.Delete, contentDescription = null)
                             Spacer(modifier = Modifier.width(8.dp))
-                            Text("Delete File", style = MaterialTheme.typography.titleMedium)
+                            Text("Delete File", style = MaterialTheme.typography.titleMedium, color = Color.White)
                         }
 
                         Spacer(modifier = Modifier.height(16.dp))
@@ -362,7 +361,7 @@ fun TreemapContent(
                 val node = uiState.nodePendingDeletion
                 AlertDialog(
                     onDismissRequest = { actions.onDismissConfirmation() },
-                    containerColor = DroidDarkSurface,
+                    containerColor = MaterialTheme.colorScheme.surface,
                     icon = {
                         Icon(
                             imageVector = Icons.Default.WarningAmber,
@@ -375,7 +374,7 @@ fun TreemapContent(
                         Text(
                             text = if (node.isDirectory) "Delete Folder?" else "Delete File?",
                             style = MaterialTheme.typography.titleLarge,
-                            color = Color.White
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                     },
                     text = {
@@ -383,7 +382,7 @@ fun TreemapContent(
                             Text(
                                 text = "Are you sure you want to permanently delete \"${node.name}\"?",
                                 style = MaterialTheme.typography.bodyMedium,
-                                color = Color.White
+                                color = MaterialTheme.colorScheme.onSurface
                             )
                             Spacer(modifier = Modifier.height(12.dp))
                             FluidCard(modifier = Modifier.fillMaxWidth()) {
@@ -391,13 +390,13 @@ fun TreemapContent(
                                     Text(
                                         text = "Size: ${node.formattedSize}",
                                         style = MaterialTheme.typography.bodyMedium,
-                                        color = DroidPrimary
+                                        color = MaterialTheme.colorScheme.primary
                                     )
                                     Spacer(modifier = Modifier.height(4.dp))
                                     Text(
                                         text = node.path,
                                         style = MaterialTheme.typography.labelSmall,
-                                        color = Color.Gray,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                                         maxLines = 2
                                     )
                                 }
@@ -425,7 +424,7 @@ fun TreemapContent(
                             onClick = { actions.onDismissConfirmation() },
                             modifier = Modifier.fluidPress()
                         ) {
-                            Text("Cancel", color = Color.LightGray)
+                            Text("Cancel", color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                     }
                 )
@@ -467,12 +466,12 @@ fun TreemapContentRow(
                     Box(
                         modifier = Modifier
                             .size(32.dp)
-                            .clip(CircleShape)
-                            .background(node.category.color.copy(alpha = 0.2f)),
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(node.category.color.copy(alpha = 0.16f)),
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
-                            imageVector = if (node.isDirectory) Icons.Default.Folder else Icons.AutoMirrored.Filled.InsertDriveFile,
+                            imageVector = if (node.isDirectory) Icons.Default.Folder else node.category.icon,
                             contentDescription = null,
                             tint = node.category.color,
                             modifier = Modifier.size(18.dp)
@@ -485,7 +484,7 @@ fun TreemapContentRow(
                         Text(
                             text = node.name,
                             style = MaterialTheme.typography.bodyLarge,
-                            color = Color.White,
+                            color = MaterialTheme.colorScheme.onSurface,
                             maxLines = 1
                         )
                         Text(
@@ -506,7 +505,7 @@ fun TreemapContentRow(
                         Icon(
                             imageVector = Icons.Default.DeleteOutline,
                             contentDescription = "Delete",
-                            tint = Color.Gray,
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant,
                             modifier = Modifier.size(18.dp)
                         )
                     }
@@ -515,7 +514,7 @@ fun TreemapContentRow(
                         Icon(
                             imageVector = Icons.Default.ChevronRight,
                             contentDescription = null,
-                            tint = Color.Gray,
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant,
                             modifier = Modifier.size(18.dp)
                         )
                     }
@@ -532,7 +531,7 @@ fun TreemapContentRow(
                     .height(3.dp)
                     .clip(RoundedCornerShape(1.5.dp)),
                 color = node.category.color,
-                trackColor = Color.DarkGray.copy(alpha = 0.3f)
+                trackColor = MaterialTheme.colorScheme.surfaceVariant
             )
         }
     }
@@ -546,7 +545,7 @@ fun DetailRow(label: String, value: String) {
             .padding(vertical = 4.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(text = label, style = MaterialTheme.typography.bodyMedium, color = Color.Gray)
-        Text(text = value, style = MaterialTheme.typography.bodyLarge, color = Color.White)
+        Text(text = label, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text(text = value, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurface)
     }
 }

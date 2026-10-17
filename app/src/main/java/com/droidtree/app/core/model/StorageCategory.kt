@@ -1,19 +1,33 @@
 package com.droidtree.app.core.model
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Android
+import androidx.compose.material.icons.rounded.Audiotrack
+import androidx.compose.material.icons.rounded.Code
+import androidx.compose.material.icons.rounded.Description
+import androidx.compose.material.icons.rounded.FolderZip
+import androidx.compose.material.icons.rounded.Image
+import androidx.compose.material.icons.rounded.Memory
+import androidx.compose.material.icons.rounded.Videocam
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 
 /**
  * High-level categorization of files for storage visualization.
  */
-enum class StorageCategory(val displayName: String, val color: Color) {
-    VIDEOS("Videos", Color(0xFFEF5350)),
-    IMAGES("Images", Color(0xFF42A5F5)),
-    AUDIO("Audio", Color(0xFFFFB74D)),
-    DOCUMENTS("Documents", Color(0xFF66BB6A)),
-    ARCHIVES("Archives", Color(0xFFAB47BC)),
-    APKS("APKs & Installers", Color(0xFF26A69A)),
-    CODE("Code & Text", Color(0xFFFFA726)),
-    SYSTEM("System & Other", Color(0xFF78909C));
+enum class StorageCategory(
+    val displayName: String,
+    val color: Color,
+    val icon: ImageVector
+) {
+    VIDEOS("Videos", Color(0xFFEF5350), Icons.Rounded.Videocam),
+    IMAGES("Images", Color(0xFF42A5F5), Icons.Rounded.Image),
+    AUDIO("Audio", Color(0xFFFFB74D), Icons.Rounded.Audiotrack),
+    DOCUMENTS("Documents", Color(0xFF66BB6A), Icons.Rounded.Description),
+    ARCHIVES("Archives", Color(0xFFAB47BC), Icons.Rounded.FolderZip),
+    APKS("APKs & Installers", Color(0xFF26A69A), Icons.Rounded.Android),
+    CODE("Code & Text", Color(0xFFFFA726), Icons.Rounded.Code),
+    SYSTEM("System & Other", Color(0xFF78909C), Icons.Rounded.Memory);
 
     companion object {
         fun fromExtension(ext: String): StorageCategory {

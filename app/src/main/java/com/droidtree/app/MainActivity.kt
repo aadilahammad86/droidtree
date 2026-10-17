@@ -12,15 +12,23 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.droidtree.app.core.designsystem.theme.DroidDarkBackground
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.droidtree.app.core.designsystem.theme.AppColorPalette
 import com.droidtree.app.core.designsystem.theme.DroidTreeTheme
+import com.droidtree.app.core.designsystem.theme.ThemeMode
+import com.droidtree.app.data.datastore.PreferencesManager
 import com.droidtree.app.ui.navigation.DroidTreeNavGraph
+import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
+
+    private val preferencesManager: PreferencesManager by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,10 +37,16 @@ class MainActivity : ComponentActivity() {
         checkStoragePermission()
 
         setContent {
-            DroidTreeTheme {
+            val themeMode by preferencesManager.themeMode.collectAsStateWithLifecycle(initialValue = ThemeMode.SYSTEM)
+            val colorPalette by preferencesManager.colorPalette.collectAsStateWithLifecycle(initialValue = AppColorPalette.MONET)
+
+            DroidTreeTheme(
+                themeMode = themeMode,
+                colorPalette = colorPalette
+            ) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = DroidDarkBackground
+                    color = MaterialTheme.colorScheme.background
                 ) {
                     DroidTreeNavGraph()
                 }

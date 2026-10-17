@@ -1,0 +1,14 @@
+False-positive appeal for DroidTree (open-source disk analyzer).
+
+App: DroidTree
+Package: com.droidtree.app (v1.0.0)
+Source: https://github.com/aadilahammad86/droidtree
+APK: https://github.com/aadilahammad86/droidtree/releases/download/v1.0.0/DroidTree-v1.0.0.apk
+APK SHA256: 96cd1984c01f479f2f8c1c20beca6d353ef84fe23681934c6bb50d095a6499bb
+Cert SHA256: EB:4E:FC:D4:5A:38:B4:39:39:76:25:59:AF:97:D3:46:90:D9:83:97:B3:05:DA:F3:56:73:50:2A:DD:C6:74:BF
+
+Core Function:
+DroidTree scans storage to display treemap visualizations. MANAGE_EXTERNAL_STORAGE is solely used for disk analysis and user file management. Contains no ads, tracking, or malware.
+
+Reason:
+Initial release with a new certificate lacking cloud reputation. Full source is public on GitHub. Please whitelist.

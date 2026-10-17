@@ -14,13 +14,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.droidtree.app.core.designsystem.theme.DroidPrimary
-import com.droidtree.app.core.designsystem.theme.DroidSecondary
 import java.util.Locale
 
 /**
@@ -37,6 +34,8 @@ fun StorageGaugeRing(
     strokeWidth: Dp = 14.dp
 ) {
     val animatedProgress = remember { Animatable(0f) }
+    val primaryColor = MaterialTheme.colorScheme.primary
+    val secondaryColor = MaterialTheme.colorScheme.secondary
 
     LaunchedEffect(usedPercentage) {
         animatedProgress.animateTo(
@@ -57,13 +56,13 @@ fun StorageGaugeRing(
 
             // Background track (Free space)
             drawCircle(
-                color = DroidSecondary.copy(alpha = 0.2f),
+                color = secondaryColor.copy(alpha = 0.25f),
                 style = Stroke(width = strokePx)
             )
 
             // Animated Used arc
             drawArc(
-                color = DroidPrimary,
+                color = primaryColor,
                 startAngle = -90f,
                 sweepAngle = 360f * animatedProgress.value,
                 useCenter = false,

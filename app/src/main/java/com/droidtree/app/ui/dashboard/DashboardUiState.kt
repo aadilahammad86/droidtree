@@ -1,6 +1,8 @@
 package com.droidtree.app.ui.dashboard
 
 import androidx.compose.runtime.Stable
+import com.droidtree.app.core.designsystem.theme.AppColorPalette
+import com.droidtree.app.core.designsystem.theme.ThemeMode
 import com.droidtree.app.core.model.FileNode
 import com.droidtree.app.core.model.ScanState
 import com.droidtree.app.core.model.StorageCategory
@@ -15,7 +17,10 @@ data class DashboardUiState(
     val isScanning: Boolean = false,
     val scanProgressText: String = "",
     val errorMessage: String? = null,
-    val exportSuccessMessage: String? = null
+    val exportSuccessMessage: String? = null,
+    val themeMode: ThemeMode = ThemeMode.SYSTEM,
+    val colorPalette: AppColorPalette = AppColorPalette.MONET,
+    val isThemeSheetVisible: Boolean = false
 )
 
 /**
@@ -36,5 +41,9 @@ interface DashboardActions {
     fun onOpenTreemapClick()
     fun onOpenFileBrowserClick()
     fun onExportPdfReportClick()
+    fun onOpenThemeSheet()
+    fun onCloseThemeSheet()
+    fun onSelectThemeMode(mode: ThemeMode)
+    fun onSelectColorPalette(palette: AppColorPalette)
     fun onDismissToast()
 }

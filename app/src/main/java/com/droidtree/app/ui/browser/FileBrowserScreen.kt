@@ -17,11 +17,9 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.InsertDriveFile
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.DeleteOutline
@@ -55,13 +53,8 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import com.droidtree.app.core.designsystem.components.FluidCard
-import com.droidtree.app.core.designsystem.components.ToastBanner
-import com.droidtree.app.core.designsystem.components.ToastType
 import com.droidtree.app.core.designsystem.motion.fluidPress
-import com.droidtree.app.core.designsystem.theme.DroidDarkBackground
-import com.droidtree.app.core.designsystem.theme.DroidDarkSurface
 import com.droidtree.app.core.designsystem.theme.DroidError
-import com.droidtree.app.core.designsystem.theme.DroidPrimary
 import com.droidtree.app.core.model.FileNode
 import org.koin.androidx.compose.koinViewModel
 import java.text.SimpleDateFormat
@@ -109,7 +102,7 @@ fun FileBrowserContent(
     val bottomSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
     Scaffold(
-        containerColor = DroidDarkBackground,
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             Row(
                 modifier = Modifier
@@ -125,7 +118,7 @@ fun FileBrowserContent(
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "Navigate Up",
-                        tint = Color.White
+                        tint = MaterialTheme.colorScheme.onBackground
                     )
                 }
 
@@ -135,7 +128,7 @@ fun FileBrowserContent(
                     Text(
                         text = uiState.currentFolderName,
                         style = MaterialTheme.typography.titleLarge,
-                        color = Color.White
+                        color = MaterialTheme.colorScheme.onBackground
                     )
                     Text(
                         text = "Total: ${FileNode.formatByteSize(uiState.totalFolderBytes)} • ${uiState.items.size} items",
@@ -154,14 +147,14 @@ fun FileBrowserContent(
         ) {
             if (uiState.isLoading) {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    CircularProgressIndicator(color = DroidPrimary)
+                    CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
                 }
             } else if (uiState.items.isEmpty()) {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     Text(
                         text = "Folder is empty",
                         style = MaterialTheme.typography.bodyLarge,
-                        color = Color.Gray
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             } else {
@@ -194,7 +187,7 @@ fun FileBrowserContent(
                 ModalBottomSheet(
                     onDismissRequest = { actions.onDismissModals() },
                     sheetState = bottomSheetState,
-                    containerColor = DroidDarkSurface
+                    containerColor = MaterialTheme.colorScheme.surface
                 ) {
                     Column(
                         modifier = Modifier
@@ -210,12 +203,12 @@ fun FileBrowserContent(
                                 Box(
                                     modifier = Modifier
                                         .size(36.dp)
-                                        .clip(CircleShape)
-                                        .background(node.category.color.copy(alpha = 0.2f)),
+                                        .clip(RoundedCornerShape(10.dp))
+                                        .background(node.category.color.copy(alpha = 0.16f)),
                                     contentAlignment = Alignment.Center
                                 ) {
                                     Icon(
-                                        imageVector = if (node.isDirectory) Icons.Default.Folder else Icons.AutoMirrored.Filled.InsertDriveFile,
+                                        imageVector = if (node.isDirectory) Icons.Default.Folder else node.category.icon,
                                         contentDescription = null,
                                         tint = node.category.color,
                                         modifier = Modifier.size(20.dp)
@@ -225,12 +218,16 @@ fun FileBrowserContent(
                                 Text(
                                     text = node.name,
                                     style = MaterialTheme.typography.titleLarge,
-                                    color = Color.White,
+                                    color = MaterialTheme.colorScheme.onSurface,
                                     maxLines = 1
                                 )
                             }
                             IconButton(onClick = { actions.onDismissModals() }) {
-                                Icon(Icons.Default.Close, contentDescription = "Close", tint = Color.Gray)
+                                Icon(
+                                    Icons.Default.Close,
+                                    contentDescription = "Close",
+                                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
                             }
                         }
 
@@ -262,7 +259,7 @@ fun FileBrowserContent(
                                     .fluidPress(),
                                 shape = RoundedCornerShape(12.dp)
                             ) {
-                                Text("Cancel")
+                                Text("Cancel", color = MaterialTheme.colorScheme.onSurface)
                             }
 
                             Button(
@@ -274,9 +271,9 @@ fun FileBrowserContent(
                                     .height(48.dp)
                                     .fluidPress()
                             ) {
-                                Icon(Icons.Default.Delete, contentDescription = null, modifier = Modifier.size(18.dp))
+                                Icon(Icons.Default.Delete, contentDescription = null, modifier = Modifier.size(18.dp), tint = Color.White)
                                 Spacer(modifier = Modifier.width(6.dp))
-                                Text("Delete")
+                                Text("Delete", color = Color.White)
                             }
                         }
 
@@ -290,7 +287,7 @@ fun FileBrowserContent(
                 val node = uiState.itemPendingDeletion
                 AlertDialog(
                     onDismissRequest = { actions.onDismissModals() },
-                    containerColor = DroidDarkSurface,
+                    containerColor = MaterialTheme.colorScheme.surface,
                     icon = {
                         Icon(
                             imageVector = Icons.Default.WarningAmber,
@@ -303,7 +300,7 @@ fun FileBrowserContent(
                         Text(
                             text = if (node.isDirectory) "Delete Folder?" else "Delete File?",
                             style = MaterialTheme.typography.titleLarge,
-                            color = Color.White
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                     },
                     text = {
@@ -311,7 +308,7 @@ fun FileBrowserContent(
                             Text(
                                 text = "Are you sure you want to permanently delete \"${node.name}\"?",
                                 style = MaterialTheme.typography.bodyMedium,
-                                color = Color.White
+                                color = MaterialTheme.colorScheme.onSurface
                             )
                             Spacer(modifier = Modifier.height(12.dp))
                             FluidCard(modifier = Modifier.fillMaxWidth()) {
@@ -319,13 +316,13 @@ fun FileBrowserContent(
                                     Text(
                                         text = "Size: ${node.formattedSize}",
                                         style = MaterialTheme.typography.bodyMedium,
-                                        color = DroidPrimary
+                                        color = MaterialTheme.colorScheme.primary
                                     )
                                     Spacer(modifier = Modifier.height(4.dp))
                                     Text(
                                         text = node.path,
                                         style = MaterialTheme.typography.labelSmall,
-                                        color = Color.Gray,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
                                         maxLines = 2
                                     )
                                 }
@@ -353,7 +350,7 @@ fun FileBrowserContent(
                             onClick = { actions.onDismissModals() },
                             modifier = Modifier.fluidPress()
                         ) {
-                            Text("Cancel", color = Color.LightGray)
+                            Text("Cancel", color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                     }
                 )
@@ -391,12 +388,12 @@ fun FileItemRow(
                     Box(
                         modifier = Modifier
                             .size(36.dp)
-                            .clip(CircleShape)
-                            .background(node.category.color.copy(alpha = 0.2f)),
+                            .clip(RoundedCornerShape(10.dp))
+                            .background(node.category.color.copy(alpha = 0.16f)),
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
-                            imageVector = if (node.isDirectory) Icons.Default.Folder else Icons.AutoMirrored.Filled.InsertDriveFile,
+                            imageVector = if (node.isDirectory) Icons.Default.Folder else node.category.icon,
                             contentDescription = null,
                             tint = node.category.color,
                             modifier = Modifier.size(20.dp)
@@ -409,7 +406,7 @@ fun FileItemRow(
                         Text(
                             text = node.name,
                             style = MaterialTheme.typography.titleMedium,
-                            color = Color.White,
+                            color = MaterialTheme.colorScheme.onSurface,
                             maxLines = 1
                         )
                         Text(
@@ -427,7 +424,7 @@ fun FileItemRow(
                     Icon(
                         imageVector = Icons.Default.DeleteOutline,
                         contentDescription = "Delete",
-                        tint = Color.Gray,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.size(20.dp)
                     )
                 }
@@ -443,7 +440,7 @@ fun FileItemRow(
                     .height(4.dp)
                     .clip(RoundedCornerShape(2.dp)),
                 color = node.category.color,
-                trackColor = Color.DarkGray.copy(alpha = 0.3f)
+                trackColor = MaterialTheme.colorScheme.surfaceVariant
             )
         }
     }
@@ -457,7 +454,7 @@ fun DetailItem(label: String, value: String) {
             .padding(vertical = 4.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(text = label, style = MaterialTheme.typography.bodyMedium, color = Color.Gray)
-        Text(text = value, style = MaterialTheme.typography.bodyLarge, color = Color.White)
+        Text(text = label, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text(text = value, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurface)
     }
 }

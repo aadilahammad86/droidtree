@@ -3,6 +3,8 @@ package com.droidtree.app.ui.dashboard
 import android.os.Environment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.droidtree.app.core.designsystem.theme.AppColorPalette
+import com.droidtree.app.core.designsystem.theme.ThemeMode
 import com.droidtree.app.core.model.ScanState
 import com.droidtree.app.core.model.StorageSummary
 import com.droidtree.app.data.datastore.PreferencesManager
@@ -36,6 +38,20 @@ class DashboardViewModel(
 
     init {
         loadQuickSummary()
+        observePreferences()
+    }
+
+    private fun observePreferences() {
+        viewModelScope.launch {
+            preferencesManager.themeMode.collect { mode ->
+                _uiState.update { it.copy(themeMode = mode) }
+            }
+        }
+        viewModelScope.launch {
+            preferencesManager.colorPalette.collect { palette ->
+                _uiState.update { it.copy(colorPalette = palette) }
+            }
+        }
     }
 
     private fun loadQuickSummary() {
@@ -115,6 +131,26 @@ class DashboardViewModel(
                 .onFailure { error ->
                     _effects.trySend(DashboardEffect.ShowToast("Failed exporting PDF: ${error.localizedMessage}"))
                 }
+        }
+    }
+
+    override fun onOpenThemeSheet() {
+        _uiState.update { it.copy(isThemeSheetVisible = true) }
+    }
+
+    override fun onCloseThemeSheet() {
+        _uiState.update { it.copy(isThemeSheetVisible = false) }
+    }
+
+    override fun onSelectThemeMode(mode: ThemeMode) {
+        viewModelScope.launch {
+            preferencesManager.setThemeMode(mode)
+        }
+    }
+
+    override fun onSelectColorPalette(palette: AppColorPalette) {
+        viewModelScope.launch {
+            preferencesManager.setColorPalette(palette)
         }
     }
 

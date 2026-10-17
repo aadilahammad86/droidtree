@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Storage Iris (macOS Glass) — Standalone Verification & Dynamic Backgrounds</title>
+  <style>
+    :root {
+      --bg: #0B0D12;
+      --surface: #141822;
+      --surface-border: rgba(255, 255, 255, 0.09);
+      --text: #F8FAFC;
+      --text-muted: #94A3B8;
+      --primary: #3B82F6;
+      --primary-light: #60A5FA;
+      --font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-family);
+      line-height: 1.5;
+      padding: 40px 24px 80px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container { max-width: 1240px; margin: 0 auto; }
+
+    header {
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--surface-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #60A5FA;
+      background: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 15.5px;
+      color: var(--text-muted);
+      max-width: 780px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 40px 0 10px;
+    }
+
+    .section-desc {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      max-width: 800px;
+    }
+
+    /* Hero Showcase: Standalone Mark with Dynamic Background Testing */
+    .hero-interactive-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 24px;
+      padding: 36px;
+      margin-bottom: 48px;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.4);
+    }
+
+    .controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--surface-border);
+    }
+
+    .control-label {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-right: 8px;
+    }
+
+    .palette-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .bg-choice-btn {
+      padding: 8px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--surface-border);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .bg-choice-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-1px);
+    }
+    .bg-choice-btn.active {
+      background: var(--primary);
+      border-color: var(--primary-light);
+      color: #FFFFFF;
+    }
+    .swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /* Mask Shapes for Android & iOS */
+    .mask-options {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .mask-btn {
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--surface-border);
+      border-radius: 8px;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .mask-btn.active {
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* The Main Stage */
+    .hero-stage {
+      height: 380px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.35s ease;
+      background: radial-gradient(circle at 50% 45%, #1E2433 0%, #121620 60%, #090B0F 100%);
+      border: 1px solid var(--surface-border);
+    }
+
+    .hero-stage.checkerboard {
+      background-image: linear-gradient(45deg, #181B22 25%, transparent 25%), 
+                        linear-gradient(-45deg, #181B22 25%, transparent 25%), 
+                        linear-gradient(45deg, transparent 75%, #181B22 75%), 
+                        linear-gradient(-45deg, transparent 75%, #181B22 75%);
+      background-size: 24px 24px;
+      background-position: 0 0, 0 12px, 12px -12px, -12px 0px;
+      background-color: #0F1115;
+    }
+
+    /* The Adaptive Icon Housing */
+    .adaptive-housing {
+      width: 220px;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
+    }
+
+    .adaptive-housing.shape-none {
+      border-radius: 0;
+      box-shadow: none;
+      background: transparent !important;
+    }
+    .adaptive-housing.shape-circle {
+      border-radius: 50%;
+    }
+    .adaptive-housing.shape-squircle {
+      border-radius: 52px;
+    }
+    .adaptive-housing.shape-rounded-square {
+      border-radius: 36px;
+    }
+    .adaptive-housing.shape-teardrop {
+      border-radius: 50% 50% 50% 8px;
+    }
+
+    .adaptive-housing svg {
+      width: 170px;
+      height: 170px;
+      filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.35));
+    }
+
+    /* Multi-Size Ladder Grid */
+    .ladder-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .ladder-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 16px;
+      padding: 20px 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      text-align: center;
+    }
+
+    .ladder-stage {
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ladder-label {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    /* Implementation Summary Table */
+    .tech-specs-card {
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 40px;
+    }
+
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+
+    .specs-table th {
+      text-align: left;
+      padding: 12px 16px;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--surface-border);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .specs-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--surface-border);
+      color: var(--text);
+    }
+
+    .specs-table code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 3px 8px;
+      border-radius: 6px;
+      color: #93C5FD;
+      font-family: ui-monospace, Menlo, Consolas, monospace;
+      font-size: 12.5px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #34D399;
+      background: rgba(16, 185, 129, 0.12);
+      padding: 3px 10px;
+      border-radius: 12px;
+    }
+
+    footer {
+      border-top: 1px solid var(--surface-border);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div>
+        <div class="badge">Approved Direction · Zero Squircle Container</div>
+        <h1>The Storage Iris — macOS Glass</h1>
+        <p class="subtitle">
+          Pure foreground vector with translucent glass refraction, specular optical crests, and glowing nucleus. Completely container-free—ready to sit seamlessly over dynamic Android & iOS background systems.
+        </p>
+      </div>
+    </header>
+
+    <!-- Interactive Stage -->
+    <h2 class="section-title">1. Dynamic Background & Mask Shape Verification</h2>
+    <p class="section-desc">
+      Test the standalone glass iris against various OS dynamic backgrounds (Material You Monet tonal themes, Dark OLED, iOS wallpaper gradients, and raw transparent checkerboard) across standard OEM adaptive icon mask shapes.
+    </p>
+
+    <div class="hero-interactive-card">
+      <div class="controls-bar">
+        <div class="palette-group">
+          <span class="control-label">Background:</span>
+          <button class="bg-choice-btn active" onclick="setBg('oled', this)">
+            <span class="swatch" style="background: #121620;"></span> Dark OLED
+          </button>
+          <button class="bg-choice-btn" onclick="setBg('monet-blue', this)">
+            <span class="swatch" style="background: #1E3A8A;"></span> Monet Sapphire
+          </button>
+          <button class="bg-choice-btn" onclick="setBg('monet-emerald', this)">
+            <span class="swatch" style="background: #064E3B;"></span> Monet Forest
+          </button>
+          <button class="bg-choice-btn" onclick="setBg('ios-glass', this)">
+            <span class="swatch" style="background: linear-gradient(135deg, #38BDF8, #6366F1);"></span> iOS Aurora
+          </button>
+          <button class="bg-choice-btn" onclick="setBg('transparent', this)">
+            <span class="swatch" style="background: #334155;"></span> Transparent Alpha
+          </button>
+        </div>
+
+        <div class="palette-group">
+          <span class="control-label">Mask Shape:</span>
+          <div class="mask-options">
+            <button class="mask-btn" onclick="setShape('none', this)">None (Raw Mark)</button>
+            <button class="mask-btn active" onclick="setShape('circle', this)">Pixel Circle</button>
+            <button class="mask-btn" onclick="setShape('squircle', this)">OnePlus Squircle</button>
+            <button class="mask-btn" onclick="setShape('rounded-square', this)">Samsung Squircle</button>
+            <button class="mask-btn" onclick="setShape('teardrop', this)">Teardrop</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-stage" id="main-stage">
+        <div class="adaptive-housing shape-circle" id="housing" style="background: radial-gradient(circle at 50% 45%, #1E2433 0%, #121620 60%, #090B0F 100%);">
+          <!-- Standalone macOS Glass Storage Iris (No Squircle Bounding Box) -->
+          <svg viewBox="0 0 200 200">
+            <defs>
+              <filter id="iris-drop" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#000000" flood-opacity="0.38"/>
+              </filter>
+              <linearGradient id="p-arc1" x1="20%" y1="0%" x2="80%" y2="100%">
+                <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.9"/>
+                <stop offset="25%" stop-color="#93C5FD" stop-opacity="0.75"/>
+                <stop offset="65%" stop-color="#3B82F6" stop-opacity="0.65"/>
+                <stop offset="100%" stop-color="#1D4ED8" stop-opacity="0.55"/>
+              </linearGradient>
+              <linearGradient id="p-arc2" x1="0%" y1="20%" x2="100%" y2="80%">
+                <stop offset="0%" stop-color="#E0F2FE" stop-opacity="0.9"/>
+                <stop offset="40%" stop-color="#60A5FA" stop-opacity="0.70"/>
+                <stop offset="100%" stop-color="#2563EB" stop-opacity="0.60"/>
+              </linearGradient>
+              <radialGradient id="p-core" cx="35%" cy="30%" r="70%">
+                <stop offset="0%" stop-color="#FFFFFF"/>
+                <stop offset="25%" stop-color="#BAE6FD"/>
+                <stop offset="55%" stop-color="#3B82F6"/>
+                <stop offset="85%" stop-color="#1D4ED8"/>
+                <stop offset="100%" stop-color="#0F172A"/>
+              </radialGradient>
+            </defs>
+            <g filter="url(#iris-drop)">
+              <!-- Outer Arcs -->
+              <g fill="none" stroke-linecap="round">
+                <path d="M 100.00 174.00 A 74 74 0 0 1 30.46 74.69" stroke="url(#p-arc1)" stroke-width="16"/>
+                <path d="M 39.38 57.56 A 74 74 0 0 1 152.33 47.67" stroke="url(#p-arc2)" stroke-width="16"/>
+                <path d="M 164.09 63.00 A 74 74 0 0 1 167.07 131.27" stroke="url(#p-arc1)" stroke-width="16"/>
+              </g>
+              <!-- Inner Arcs -->
+              <g fill="none" stroke-linecap="round">
+                <path d="M 84.95 141.35 A 44 44 0 1 1 128.28 66.29" stroke="url(#p-arc2)" stroke-width="14"/>
+                <path d="M 138.11 78.00 A 44 44 0 0 1 100.00 144.00" stroke="url(#p-arc1)" stroke-width="14"/>
+              </g>
+              <!-- Specular Highlights -->
+              <path d="M 44 54 A 74 74 0 0 1 144 45" fill="none" stroke="#FFFFFF" stroke-opacity="0.85" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M 80 58 A 44 44 0 0 1 120 62" fill="none" stroke="#FFFFFF" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round"/>
+              <!-- Nucleus -->
+              <circle cx="100" cy="100" r="17" fill="url(#p-core)"/>
+              <ellipse cx="96" cy="94" rx="5" ry="3" fill="#FFFFFF" opacity="0.85" transform="rotate(-20 96 94)"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scale Ladder -->
+    <h2 class="section-title">2. Optical Scale Ladder (Testing Micro & Macro Sizes)</h2>
+    <p class="section-desc">
+      Verifying that the 60° aperture gap, stroke weighting, and specular rim remain distinct at standard display densities.
+    </p>
+
+    <div class="ladder-grid">
+      <div class="ladder-card">
+        <div class="ladder-stage">
+          <img src="storage-iris-glass-dark.png" width="16" height="16" alt="16px">
+        </div>
+        <span class="ladder-label">16 px (Favicon / Bar)</span>
+      </div>
+      <div class="ladder-card">
+        <div class="ladder-stage">
+          <img src="storage-iris-glass-dark.png" width="24" height="24" alt="24px">
+        </div>
+        <span class="ladder-label">24 px (Status Bar)</span>
+      </div>
+      <div class="ladder-card">
+        <div class="ladder-stage">
+          <img src="storage-iris-glass-dark.png" width="32" height="32" alt="32px">
+        </div>
+        <span class="ladder-label">32 px (Notification)</span>
+      </div>
+      <div class="ladder-card">
+        <div class="ladder-stage">
+          <img src="storage-iris-glass-dark.png" width="48" height="48" alt="48px">
+        </div>
+        <span class="ladder-label">48 px (mdpi)</span>
+      </div>
+      <div class="ladder-card">
+        <div class="ladder-stage">
+          <img src="storage-iris-glass-dark.png" width="72" height="72" alt="72px">
+        </div>
+        <span class="ladder-label">72 px (hdpi)</span>
+      </div>
+      <div class="ladder-card">
+        <div class="ladder-stage">
+          <img src="storage-iris-glass-dark.png" width="96" height="96" alt="96px">
+        </div>
+        <span class="ladder-label">96 px (xhdpi)</span>
+      </div>
+    </div>
+
+    <!-- Production Deliverables Table -->
+    <h2 class="section-title">3. Production Asset Kit Generated in Project</h2>
+    <p class="section-desc">
+      All files are fully generated, wired into <code>AndroidManifest.xml</code>, and ready for immediate Gradle compilation.
+    </p>
+
+    <div class="tech-specs-card">
+      <table class="specs-table">
+        <thead>
+          <tr>
+            <th>Asset Type</th>
+            <th>File Path</th>
+            <th>Description & Purpose</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Standalone Vector Master</strong></td>
+            <td><code>design/svg/storage-iris-macos-glass.svg</code></td>
+            <td>Pure SVG foreground symbol, zero container, macOS glass styling</td>
+            <td><span class="status-pill">Ready</span></td>
+          </tr>
+          <tr>
+            <td><strong>Adaptive Foreground</strong></td>
+            <td><code>app/src/main/res/drawable/ic_launcher_foreground.xml</code></td>
+            <td>Android VectorDrawable (108dp) with native gradient paths</td>
+            <td><span class="status-pill">Ready</span></td>
+          </tr>
+          <tr>
+            <td><strong>Adaptive Background</strong></td>
+            <td><code>app/src/main/res/drawable/ic_launcher_background.xml</code></td>
+            <td>Dynamic XML radial background (#1A1E29 → #0B0D12)</td>
+            <td><span class="status-pill">Ready</span></td>
+          </tr>
+          <tr>
+            <td><strong>Adaptive Icon Config</strong></td>
+            <td><code>app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml</code></td>
+            <td>Android 8.0+ adaptive icon definition pairing background & foreground</td>
+            <td><span class="status-pill">Ready</span></td>
+          </tr>
+          <tr>
+            <td><strong>Raster Mipmaps</strong></td>
+            <td><code>app/src/main/res/mipmap-{m,h,x,xx,xxx}hdpi/</code></td>
+            <td>Pre-rendered raster fallback PNGs across all pixel densities</td>
+            <td><span class="status-pill">Ready</span></td>
+          </tr>
+          <tr>
+            <td><strong>Play Store Icon</strong></td>
+            <td><code>design/ic_launcher-playstore.png</code></td>
+            <td>512×512 HD icon for Google Play Console submission</td>
+            <td><span class="status-pill">Ready</span></td>
+          </tr>
+          <tr>
+            <td><strong>Manifest Integration</strong></td>
+            <td><code>app/src/main/AndroidManifest.xml</code></td>
+            <td>Wired to <code>@mipmap/ic_launcher</code> & <code>@mipmap/ic_launcher_round</code></td>
+            <td><span class="status-pill">Active</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <footer>
+      <div>DroidTree Identity System · Designed with Apple Human Interface Guidelines & Android Adaptive Specs.</div>
+      <div>Zero squircle container · Transparent dynamic compatibility.</div>
+    </footer>
+  </div>
+
+  <script>
+    let currentBgStyle = "radial-gradient(circle at 50% 45%, #1E2433 0%, #121620 60%, #090B0F 100%)";
+    let isCheckerboard = false;
+
+    function setBg(type, btn) {
+      document.querySelectorAll('.bg-choice-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const stage = document.getElementById('main-stage');
+      const housing = document.getElementById('housing');
+      stage.classList.remove('checkerboard');
+      isCheckerboard = false;
+
+      if (type === 'oled') {
+        currentBgStyle = "radial-gradient(circle at 50% 45%, #1E2433 0%, #121620 60%, #090B0F 100%)";
+      } else if (type === 'monet-blue') {
+        currentBgStyle = "linear-gradient(145deg, #1E3A8A, #0F172A)";
+      } else if (type === 'monet-emerald') {
+        currentBgStyle = "linear-gradient(145deg, #064E3B, #06281E)";
+      } else if (type === 'ios-glass') {
+        currentBgStyle = "linear-gradient(135deg, #0284C7, #4F46E5)";
+      } else if (type === 'transparent') {
+        currentBgStyle = "transparent";
+        stage.classList.add('checkerboard');
+        isCheckerboard = true;
+      }
+
+      if (!housing.classList.contains('shape-none')) {
+        housing.style.background = currentBgStyle;
+      }
+    }
+
+    function setShape(shape, btn) {
+      document.querySelectorAll('.mask-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const housing = document.getElementById('housing');
+      housing.className = 'adaptive-housing shape-' + shape;
+
+      if (shape === 'none') {
+        housing.style.background = 'transparent';
+      } else {
+        housing.style.background = currentBgStyle;
+      }
+    }
+  </script>
+</body>
+</html>
