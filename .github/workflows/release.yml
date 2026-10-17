@@ -2,6 +2,9 @@ name: Release Build
 
 on:
   push:
+    branches:
+      - main
+      - master
     tags:
       - 'v*'
   workflow_dispatch:
@@ -19,6 +22,50 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Calculate Auto-Incrementing Version
+        id: versioning
+        run: |
+          git fetch --tags --force
+          
+          if [[ "${{ github.ref_type }}" == "tag" ]]; then
+            TAG_NAME="${{ github.ref_name }}"
+            RAW_VERSION="${TAG_NAME#v}"
+            RUN_NUM="${{ github.run_number }}"
+            VERSION_CODE=$((1000 + RUN_NUM))
+          else
+            # Search for highest existing tag
+            LATEST_TAG=$(git tag -l "v*" --sort=-v:refname | head -n 1)
+            echo "Latest found tag: $LATEST_TAG"
+            
+            if [ -z "$LATEST_TAG" ]; then
+              TAG_NAME="v1.0.1"
+              RAW_VERSION="1.0.1"
+              VERSION_CODE=2
+            else
+              V_NO_PREFIX="${LATEST_TAG#v}"
+              MAJOR=$(echo "$V_NO_PREFIX" | cut -d. -f1)
+              MINOR=$(echo "$V_NO_PREFIX" | cut -d. -f2)
+              PATCH=$(echo "$V_NO_PREFIX" | cut -d. -f3)
+              
+              MAJOR=${MAJOR:-1}
+              MINOR=${MINOR:-0}
+              PATCH=${PATCH:-0}
+              
+              NEW_PATCH=$((PATCH + 1))
+              TAG_NAME="v${MAJOR}.${MINOR}.${NEW_PATCH}"
+              RAW_VERSION="${MAJOR}.${MINOR}.${NEW_PATCH}"
+              VERSION_CODE=$((1000 + ${{ github.run_number }}))
+            fi
+          fi
+          
+          echo "Calculated Version Tag: $TAG_NAME"
+          echo "Calculated Version Name: $RAW_VERSION"
+          echo "Calculated Version Code: $VERSION_CODE"
+          
+          echo "version_tag=$TAG_NAME" >> $GITHUB_OUTPUT
+          echo "version_name=$RAW_VERSION" >> $GITHUB_OUTPUT
+          echo "version_code=$VERSION_CODE" >> $GITHUB_OUTPUT
 
       - name: Set up JDK 21
         uses: actions/setup-java@v4
@@ -38,7 +85,7 @@ jobs:
         run: |
           if [ -n "$KEYSTORE_BASE64" ]; then
             echo "$KEYSTORE_BASE64" | base64 --decode > release.keystore
-            echo "Successfully decoded release keystore from secrets."
+            echo "Successfully restored release keystore from secrets."
           else
             echo "Keystore secret not configured. Generating high-security production key..."
             keytool -genkey -v -keystore release.keystore -alias droidtree \
@@ -52,15 +99,14 @@ jobs:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD || 'droidtree2026' }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS || 'droidtree' }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD || 'droidtree2026' }}
+          VERSION_NAME: ${{ steps.versioning.outputs.version_name }}
+          VERSION_CODE: ${{ steps.versioning.outputs.version_code }}
         run: ./gradlew assembleRelease --stacktrace
 
       - name: Prepare Artifacts & Checksums
         id: prepare_artifacts
         run: |
-          VERSION="${{ github.ref_name }}"
-          if [[ "$VERSION" != v* ]]; then
-            VERSION="v1.0.0"
-          fi
+          VERSION="${{ steps.versioning.outputs.version_tag }}"
           cd app/build/outputs/apk/release
           cp app-release.apk "DroidTree-${VERSION}.apk"
           sha256sum "DroidTree-${VERSION}.apk" > checksums.txt
@@ -69,12 +115,12 @@ jobs:
 
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/tags/')
         with:
+          tag_name: ${{ steps.versioning.outputs.version_tag }}
+          name: "DroidTree ${{ steps.versioning.outputs.version_tag }}"
           files: |
             ${{ steps.prepare_artifacts.outputs.artifact_path }}
             ${{ steps.prepare_artifacts.outputs.checksum_path }}
-          name: "DroidTree ${{ github.ref_name }}"
           generate_release_notes: true
           draft: false
           prerelease: false
