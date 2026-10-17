@@ -304,7 +304,8 @@ fun DashboardContent(
                 message = uiState.exportSuccessMessage ?: uiState.errorMessage ?: "",
                 visible = uiState.exportSuccessMessage != null || uiState.errorMessage != null,
                 type = if (uiState.errorMessage != null) ToastType.ERROR else ToastType.SUCCESS,
-                modifier = Modifier.align(Alignment.TopCenter)
+                modifier = Modifier.align(Alignment.TopCenter),
+                onDismiss = { actions.onDismissToast() }
             )
         }
     }

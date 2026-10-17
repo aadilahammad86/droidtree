@@ -29,4 +29,5 @@ interface TreemapActions {
     fun onConfirmDeleteNode()
     fun onDismissConfirmation()
     fun onDismissToast()
+    fun onShowToast(text: String)
 }

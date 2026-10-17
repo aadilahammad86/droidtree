@@ -31,4 +31,5 @@ interface FileBrowserActions {
     fun onDismissModals()
     fun onSortChange(sort: SortOption)
     fun onNavigateUpClick()
+    fun onShowToast(text: String)
 }

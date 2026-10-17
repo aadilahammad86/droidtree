@@ -180,4 +180,8 @@ class FileBrowserViewModel(
             _effects.trySend(FileBrowserEffect.NavigateBack)
         }
     }
+
+    override fun onShowToast(text: String) {
+        _effects.trySend(FileBrowserEffect.ShowToast(text))
+    }
 }

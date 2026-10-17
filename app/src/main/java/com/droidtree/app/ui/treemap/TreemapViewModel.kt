@@ -170,4 +170,9 @@ class TreemapViewModel(
     override fun onDismissToast() {
         _uiState.update { it.copy(message = null) }
     }
+
+    override fun onShowToast(text: String) {
+        _uiState.update { it.copy(message = text) }
+        _effects.trySend(TreemapEffect.ShowToast(text))
+    }
 }

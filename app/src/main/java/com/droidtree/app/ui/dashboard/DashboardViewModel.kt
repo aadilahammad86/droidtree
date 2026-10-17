@@ -11,6 +11,7 @@ import com.droidtree.app.data.datastore.PreferencesManager
 import com.droidtree.app.data.pdf.StorageReportPdfExporter
 import com.droidtree.app.data.repository.StorageRepository
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -127,9 +128,14 @@ class DashboardViewModel(
                 .onSuccess { generatedFile ->
                     _uiState.update { it.copy(exportSuccessMessage = "Report saved to: ${generatedFile.name}") }
                     _effects.trySend(DashboardEffect.ShowToast("PDF exported to Downloads/${generatedFile.name}"))
+                    delay(3500)
+                    _uiState.update { if (it.exportSuccessMessage?.contains(generatedFile.name) == true) it.copy(exportSuccessMessage = null) else it }
                 }
                 .onFailure { error ->
+                    _uiState.update { it.copy(errorMessage = "Failed exporting PDF: ${error.localizedMessage}") }
                     _effects.trySend(DashboardEffect.ShowToast("Failed exporting PDF: ${error.localizedMessage}"))
+                    delay(3500)
+                    _uiState.update { it.copy(errorMessage = null) }
                 }
         }
     }
