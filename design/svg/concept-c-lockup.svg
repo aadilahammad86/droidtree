@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 140" width="540" height="140">
+  <!-- Concept C Lockup: The Storage Iris (Recommended) -->
+  <g transform="translate(18, 16) scale(0.54)">
+    <circle cx="100" cy="100" r="16" fill="currentColor"/>
+    <g fill="none" stroke="currentColor" stroke-linecap="round">
+      <path d="M 84.95 141.35 A 44 44 0 1 1 128.28 66.29" stroke-width="14"/>
+      <path d="M 138.11 78.00 A 44 44 0 0 1 100.00 144.00" stroke-width="14"/>
+      <path d="M 100.00 174.00 A 74 74 0 0 1 30.46 74.69" stroke-width="16"/>
+      <path d="M 39.38 57.56 A 74 74 0 0 1 152.33 47.67" stroke-width="16"/>
+      <path d="M 164.09 63.00 A 74 74 0 0 1 167.07 131.27" stroke-width="16"/>
+    </g>
+  </g>
+  <text x="145" y="85" fill="currentColor" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif" font-size="52" letter-spacing="-1.5">
+    <tspan font-weight="400">droid</tspan><tspan font-weight="700">tree</tspan>
+  </text>
+</svg>

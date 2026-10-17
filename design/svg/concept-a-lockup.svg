@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 140" width="540" height="140">
+  <!-- Concept A Lockup: The Treemap Monogram -->
+  <g transform="translate(18, 16) scale(0.54)">
+    <rect x="30" y="30" width="36" height="140" rx="12" fill="currentColor"/>
+    <path d="M 74 40 C 74 34.5 78.5 30 84 30 L 132 30 C 153 30 170 47 170 68 L 170 86 C 170 91.5 165.5 96 160 96 L 84 96 C 78.5 96 74 91.5 74 86 Z" fill="currentColor"/>
+    <rect x="74" y="104" width="44" height="66" rx="10" fill="currentColor"/>
+    <path d="M 126 104 L 160 104 C 165.5 104 170 108.5 170 114 L 170 132 C 170 153 153 170 132 170 L 126 170 C 126 170 126 104 126 104 Z" fill="currentColor"/>
+  </g>
+  <text x="145" y="85" fill="currentColor" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif" font-size="52" letter-spacing="-1.5">
+    <tspan font-weight="400">droid</tspan><tspan font-weight="700">tree</tspan>
+  </text>
+</svg>

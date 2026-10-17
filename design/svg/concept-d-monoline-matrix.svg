@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Concept D: The SF Monoline Matrix ("Technical Blueprint & Treemap Grid") -->
+  <!-- Outer Apple Continuous Squircle -->
+  <rect x="24" y="24" width="152" height="152" rx="42" fill="none" stroke="currentColor" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Internal Treemap Partitions -->
+  <path d="M 94 30 L 94 170" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+  <path d="M 94 100 L 168 100" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+  <!-- Hierarchical File Tree Nodes in Left Chamber -->
+  <g fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 52 64 L 52 136"/>
+    <path d="M 52 98 L 74 98"/>
+    <path d="M 52 136 L 74 136"/>
+  </g>
+  <g fill="currentColor">
+    <circle cx="52" cy="64" r="8"/>
+    <circle cx="74" cy="98" r="6"/>
+    <circle cx="74" cy="136" r="6"/>
+    <!-- Storage Data Points in Right Chambers -->
+    <circle cx="132" cy="64" r="7"/>
+    <circle cx="132" cy="136" r="7"/>
+  </g>
+</svg>

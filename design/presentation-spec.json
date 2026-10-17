@@ -1,0 +1,50 @@
+{
+  "brand": "DroidTree",
+  "tagline": "Fast, fluid storage visualizer & squarified treemap for Android",
+  "brief": "Deep filesystem scanner and squarified treemap visualizer with Apple-inspired fluid motion, dark OLED glassmorphism, and instant disk breakdown.",
+  "adjectives": ["precise", "fluid", "technical", "hierarchical", "clean"],
+  "industry": "software",
+  "mockups": ["app-icon", "website", "terminal", "readme", "sticker", "social"],
+  "nav": ["Dashboard", "Treemap", "Browser", "Export"],
+  "brand_color": "#3B82F6",
+  "tile_color": "#181B22",
+  "greyscale": false,
+  "final": false,
+  "round": 1,
+  "concepts": [
+    {
+      "name": "The Treemap D",
+      "symbol": "svg/concept-a-treemap-d.svg",
+      "lockup": "svg/concept-a-lockup.svg",
+      "idea": "A squarified treemap monogram forming a bold, modern letter D.",
+      "rationale": [
+        "Synthesizes 'Droid' with the recursive treemap subdivision algorithm.",
+        "Monolithic vertical spine anchors three proportional nested data blocks.",
+        "Flawless legibility from 16px menu bar icon to large display squircle."
+      ]
+    },
+    {
+      "name": "The Storage Iris",
+      "symbol": "svg/concept-c-storage-iris.svg",
+      "lockup": "svg/concept-c-lockup.svg",
+      "idea": "Concentric radial scanner: DaisyDisk sectors with an active aperture.",
+      "rationale": [
+        "Visualizes storage depth as concentric orbital layers revolving around a central disk core.",
+        "The intentional open aperture evokes a high-speed radar sweep and scanner beam.",
+        "Communicates instant visibility and fluid circular gauge instrumentation."
+      ]
+    },
+    {
+      "name": "The Synthetic Arbor",
+      "symbol": "svg/concept-b-synthetic-arbor.svg",
+      "lockup": "svg/concept-b-lockup.svg",
+      "idea": "Hierarchical directory tree branching into precision storage data nodes.",
+      "rationale": [
+        "Translates filesystem tree traversal into a minimalist computational bonsai.",
+        "Geometric 45-degree bifurcations terminate in proportional circular memory nodes.",
+        "Negative space subtly echoes the iconic dome curve of Android architecture."
+      ]
+    }
+  ],
+  "recommendation": "The Storage Iris (Concept C) delivers the purest Apple-grade instrument feel, pairing seamlessly with DroidTree's circular storage gauges and dark fluid theme."
+}

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Concept C: The Storage Iris ("Concentric Radial Scanner - RECOMMENDED") -->
+  <!-- Central Storage Nucleus -->
+  <circle cx="100" cy="100" r="16" fill="currentColor"/>
+  <!-- Concentric Layered Arcs with Precision Gaps -->
+  <g fill="none" stroke="currentColor" stroke-linecap="round">
+    <!-- Inner Partition Ring (R=44, Stroke=14) -->
+    <path d="M 84.95 141.35 A 44 44 0 1 1 128.28 66.29" stroke-width="14"/>
+    <path d="M 138.11 78.00 A 44 44 0 0 1 100.00 144.00" stroke-width="14"/>
+    <!-- Outer Category Sectors (R=74, Stroke=16) -->
+    <!-- Primary Sector (Bottom-Left) -->
+    <path d="M 100.00 174.00 A 74 74 0 0 1 30.46 74.69" stroke-width="16"/>
+    <!-- Secondary Sector (Top-Left) -->
+    <path d="M 39.38 57.56 A 74 74 0 0 1 152.33 47.67" stroke-width="16"/>
+    <!-- Tertiary Sector (Top-Right) -->
+    <path d="M 164.09 63.00 A 74 74 0 0 1 167.07 131.27" stroke-width="16"/>
+  </g>
+</svg>

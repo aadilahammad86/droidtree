@@ -1,0 +1,275 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1600" height="984" viewBox="0 0 1600 984"><rect width="1600" height="984" fill="#f7f7f4"/><text x="60" y="78" font-family="system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="40" font-weight="700" fill="#161616">DroidTree — logo concepts</text><text x="60" y="116" font-family="system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="20" fill="#6b6b6b">Concepts for review — pick a direction (or tell me what you like in each).</text><rect x="60" y="150" width="474.667" height="774" rx="18" fill="#fff" stroke="#e4e4e0" stroke-width="1"/><g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" x="90" y="190" width="414.667" height="300" preserveAspectRatio="xMidYMid meet">
+  <!-- Concept A: The Treemap Monogram ("The D-Tree") -->
+  <!-- Left Spine (Stem) -->
+  <rect x="30" y="30" width="36" height="140" rx="12" fill="currentColor"/>
+  <!-- Top Right Treemap Tile with curved outer shoulder -->
+  <path d="M 74 40 C 74 34.5 78.5 30 84 30 L 132 30 C 153 30 170 47 170 68 L 170 86 C 170 91.5 165.5 96 160 96 L 84 96 C 78.5 96 74 91.5 74 86 Z" fill="currentColor"/>
+  <!-- Bottom Right Tile 1 (Inner Leaf) -->
+  <rect x="74" y="104" width="44" height="66" rx="10" fill="currentColor"/>
+  <!-- Bottom Right Tile 2 (Outer Leaf with curved outer foot) -->
+  <path d="M 126 104 L 160 104 C 165.5 104 170 108.5 170 114 L 170 132 C 170 153 153 170 132 170 L 126 170 C 126 170 126 104 126 104 Z" fill="currentColor"/>
+</svg>
+</g><g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 140" x="90" y="514" width="414.667" height="120" preserveAspectRatio="xMidYMid meet">
+  <!-- Concept A Lockup: The Treemap Monogram -->
+  <g transform="translate(18, 16) scale(0.54)">
+    <rect x="30" y="30" width="36" height="140" rx="12" fill="currentColor"/>
+    <path d="M 74 40 C 74 34.5 78.5 30 84 30 L 132 30 C 153 30 170 47 170 68 L 170 86 C 170 91.5 165.5 96 160 96 L 84 96 C 78.5 96 74 91.5 74 86 Z" fill="currentColor"/>
+    <rect x="74" y="104" width="44" height="66" rx="10" fill="currentColor"/>
+    <path d="M 126 104 L 160 104 C 165.5 104 170 108.5 170 114 L 170 132 C 170 153 153 170 132 170 L 126 170 C 126 170 126 104 126 104 Z" fill="currentColor"/>
+  </g>
+  <text x="145" y="85" fill="currentColor" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif" font-size="52" letter-spacing="-1.5">
+    <tspan font-weight="400">droid</tspan><tspan font-weight="700">tree</tspan>
+  </text>
+</svg>
+</g><g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" x="90" y="660" width="64" height="64" preserveAspectRatio="xMidYMid meet">
+  <!-- Concept A: The Treemap Monogram ("The D-Tree") -->
+  <!-- Left Spine (Stem) -->
+  <rect x="30" y="30" width="36" height="140" rx="12" fill="currentColor"/>
+  <!-- Top Right Treemap Tile with curved outer shoulder -->
+  <path d="M 74 40 C 74 34.5 78.5 30 84 30 L 132 30 C 153 30 170 47 170 68 L 170 86 C 170 91.5 165.5 96 160 96 L 84 96 C 78.5 96 74 91.5 74 86 Z" fill="currentColor"/>
+  <!-- Bottom Right Tile 1 (Inner Leaf) -->
+  <rect x="74" y="104" width="44" height="66" rx="10" fill="currentColor"/>
+  <!-- Bottom Right Tile 2 (Outer Leaf with curved outer foot) -->
+  <path d="M 126 104 L 160 104 C 165.5 104 170 108.5 170 114 L 170 132 C 170 153 153 170 132 170 L 126 170 C 126 170 126 104 126 104 Z" fill="currentColor"/>
+</svg>
+</g><text x="122" y="744" font-family="system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" fill="#8a8a8a" text-anchor="middle">64px</text><g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" x="180" y="692" width="32" height="32" preserveAspectRatio="xMidYMid meet">
+  <!-- Concept A: The Treemap Monogram ("The D-Tree") -->
+  <!-- Left Spine (Stem) -->
+  <rect x="30" y="30" width="36" height="140" rx="12" fill="currentColor"/>
+  <!-- Top Right Treemap Tile with curved outer shoulder -->
+  <path d="M 74 40 C 74 34.5 78.5 30 84 30 L 132 30 C 153 30 170 47 170 68 L 170 86 C 170 91.5 165.5 96 160 96 L 84 96 C 78.5 96 74 91.5 74 86 Z" fill="currentColor"/>
+  <!-- Bottom Right Tile 1 (Inner Leaf) -->
+  <rect x="74" y="104" width="44" height="66" rx="10" fill="currentColor"/>
+  <!-- Bottom Right Tile 2 (Outer Leaf with curved outer foot) -->
+  <path d="M 126 104 L 160 104 C 165.5 104 170 108.5 170 114 L 170 132 C 170 153 153 170 132 170 L 126 170 C 126 170 126 104 126 104 Z" fill="currentColor"/>
+</svg>
+</g><text x="196" y="744" font-family="system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" fill="#8a8a8a" text-anchor="middle">32px</text><g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" x="238" y="708" width="16" height="16" preserveAspectRatio="xMidYMid meet">
+  <!-- Concept A: The Treemap Monogram ("The D-Tree") -->
+  <!-- Left Spine (Stem) -->
+  <rect x="30" y="30" width="36" height="140" rx="12" fill="currentColor"/>
+  <!-- Top Right Treemap Tile with curved outer shoulder -->
+  <path d="M 74 40 C 74 34.5 78.5 30 84 30 L 132 30 C 153 30 170 47 170 68 L 170 86 C 170 91.5 165.5 96 160 96 L 84 96 C 78.5 96 74 91.5 74 86 Z" fill="currentColor"/>
+  <!-- Bottom Right Tile 1 (Inner Leaf) -->
+  <rect x="74" y="104" width="44" height="66" rx="10" fill="currentColor"/>
+  <!-- Bottom Right Tile 2 (Outer Leaf with curved outer foot) -->
+  <path d="M 126 104 L 160 104 C 165.5 104 170 108.5 170 114 L 170 132 C 170 153 153 170 132 170 L 126 170 C 126 170 126 104 126 104 Z" fill="currentColor"/>
+</svg>
+</g><text x="246" y="744" font-family="system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" fill="#8a8a8a" text-anchor="middle">16px</text><text x="90.0" y="780" font-family="system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="26" font-weight="700" fill="#161616">A · The Treemap D</text><text x="90.0" y="814" font-family="system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="19" fill="#555">A squarified treemap monogram: algorithmic</text><text x="90.0" y="840" font-family="system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="19" fill="#555">file allocation forming a bold letter D.</text><rect x="562.667" y="150" width="474.667" height="774" rx="18" fill="#fff" stroke="#161616" stroke-width="2"/><g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" x="592.667" y="190" width="414.667" height="300" preserveAspectRatio="xMidYMid meet">
+  <!-- Concept B: The Synthetic Arbor ("The Hierarchical Node-Tree") -->
+  <!-- Main Trunk and Branches -->
+  <g fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Central Trunk -->
+    <path d="M 100 166 L 100 114"/>
+    <!-- Primary Bifurcations -->
+    <path d="M 100 114 L 66 84"/>
+    <path d="M 100 114 L 134 84"/>
+    <!-- Secondary Branches -->
+    <path d="M 66 84 L 46 54"/>
+    <path d="M 66 84 L 84 50"/>
+    <path d="M 134 84 L 116 50"/>
+    <path d="M 134 84 L 154 54"/>
+  </g>
+  <!-- Node Terminal Discs / Data Blobs -->
+  <g fill="currentColor">
+    <circle cx="100" cy="166" r="10"/>
+    <circle cx="46" cy="50" r="14"/>
+    <circle cx="84" cy="46" r="16"/>
+    <circle cx="116" cy="46" r="16"/>
+    <circle cx="154" cy="50" r="14"/>
+    <circle cx="66" cy="84" r="7"/>
+    <circle cx="134" cy="84" r="7"/>
+  </g>
+</svg>
+</g><g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 140" x="592.667" y="514" width="414.667" height="120" preserveAspectRatio="xMidYMid meet">
+  <!-- Concept B Lockup: The Synthetic Arbor -->
+  <g transform="translate(18, 16) scale(0.54)">
+    <g fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 100 166 L 100 114"/>
+      <path d="M 100 114 L 66 84"/>
+      <path d="M 100 114 L 134 84"/>
+      <path d="M 66 84 L 46 54"/>
+      <path d="M 66 84 L 84 50"/>
+      <path d="M 134 84 L 116 50"/>
+      <path d="M 134 84 L 154 54"/>
+    </g>
+    <g fill="currentColor">
+      <circle cx="100" cy="166" r="10"/>
+      <circle cx="46" cy="50" r="14"/>
+      <circle cx="84" cy="46" r="16"/>
+      <circle cx="116" cy="46" r="16"/>
+      <circle cx="154" cy="50" r="14"/>
+      <circle cx="66" cy="84" r="7"/>
+      <circle cx="134" cy="84" r="7"/>
+    </g>
+  </g>
+  <text x="145" y="85" fill="currentColor" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif" font-size="52" letter-spacing="-1.5">
+    <tspan font-weight="400">droid</tspan><tspan font-weight="700">tree</tspan>
+  </text>
+</svg>
+</g><g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" x="592.667" y="660" width="64" height="64" preserveAspectRatio="xMidYMid meet">
+  <!-- Concept B: The Synthetic Arbor ("The Hierarchical Node-Tree") -->
+  <!-- Main Trunk and Branches -->
+  <g fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Central Trunk -->
+    <path d="M 100 166 L 100 114"/>
+    <!-- Primary Bifurcations -->
+    <path d="M 100 114 L 66 84"/>
+    <path d="M 100 114 L 134 84"/>
+    <!-- Secondary Branches -->
+    <path d="M 66 84 L 46 54"/>
+    <path d="M 66 84 L 84 50"/>
+    <path d="M 134 84 L 116 50"/>
+    <path d="M 134 84 L 154 54"/>
+  </g>
+  <!-- Node Terminal Discs / Data Blobs -->
+  <g fill="currentColor">
+    <circle cx="100" cy="166" r="10"/>
+    <circle cx="46" cy="50" r="14"/>
+    <circle cx="84" cy="46" r="16"/>
+    <circle cx="116" cy="46" r="16"/>
+    <circle cx="154" cy="50" r="14"/>
+    <circle cx="66" cy="84" r="7"/>
+    <circle cx="134" cy="84" r="7"/>
+  </g>
+</svg>
+</g><text x="624.667" y="744" font-family="system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" fill="#8a8a8a" text-anchor="middle">64px</text><g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" x="682.667" y="692" width="32" height="32" preserveAspectRatio="xMidYMid meet">
+  <!-- Concept B: The Synthetic Arbor ("The Hierarchical Node-Tree") -->
+  <!-- Main Trunk and Branches -->
+  <g fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Central Trunk -->
+    <path d="M 100 166 L 100 114"/>
+    <!-- Primary Bifurcations -->
+    <path d="M 100 114 L 66 84"/>
+    <path d="M 100 114 L 134 84"/>
+    <!-- Secondary Branches -->
+    <path d="M 66 84 L 46 54"/>
+    <path d="M 66 84 L 84 50"/>
+    <path d="M 134 84 L 116 50"/>
+    <path d="M 134 84 L 154 54"/>
+  </g>
+  <!-- Node Terminal Discs / Data Blobs -->
+  <g fill="currentColor">
+    <circle cx="100" cy="166" r="10"/>
+    <circle cx="46" cy="50" r="14"/>
+    <circle cx="84" cy="46" r="16"/>
+    <circle cx="116" cy="46" r="16"/>
+    <circle cx="154" cy="50" r="14"/>
+    <circle cx="66" cy="84" r="7"/>
+    <circle cx="134" cy="84" r="7"/>
+  </g>
+</svg>
+</g><text x="698.667" y="744" font-family="system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" fill="#8a8a8a" text-anchor="middle">32px</text><g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" x="740.667" y="708" width="16" height="16" preserveAspectRatio="xMidYMid meet">
+  <!-- Concept B: The Synthetic Arbor ("The Hierarchical Node-Tree") -->
+  <!-- Main Trunk and Branches -->
+  <g fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Central Trunk -->
+    <path d="M 100 166 L 100 114"/>
+    <!-- Primary Bifurcations -->
+    <path d="M 100 114 L 66 84"/>
+    <path d="M 100 114 L 134 84"/>
+    <!-- Secondary Branches -->
+    <path d="M 66 84 L 46 54"/>
+    <path d="M 66 84 L 84 50"/>
+    <path d="M 134 84 L 116 50"/>
+    <path d="M 134 84 L 154 54"/>
+  </g>
+  <!-- Node Terminal Discs / Data Blobs -->
+  <g fill="currentColor">
+    <circle cx="100" cy="166" r="10"/>
+    <circle cx="46" cy="50" r="14"/>
+    <circle cx="84" cy="46" r="16"/>
+    <circle cx="116" cy="46" r="16"/>
+    <circle cx="154" cy="50" r="14"/>
+    <circle cx="66" cy="84" r="7"/>
+    <circle cx="134" cy="84" r="7"/>
+  </g>
+</svg>
+</g><text x="748.667" y="744" font-family="system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" fill="#8a8a8a" text-anchor="middle">16px</text><text x="592.6666666666667" y="780" font-family="system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="26" font-weight="700" fill="#161616">B · The Synthetic Arbor</text><text x="592.6666666666667" y="808" font-family="system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15" font-weight="700" fill="#161616" letter-spacing="1.5">RECOMMENDED</text><text x="592.6666666666667" y="842" font-family="system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="19" fill="#555">Hierarchical directory tree branching into</text><text x="592.6666666666667" y="868" font-family="system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="19" fill="#555">precision storage data nodes.</text><rect x="1065.33" y="150" width="474.667" height="774" rx="18" fill="#fff" stroke="#e4e4e0" stroke-width="1"/><g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" x="1095.33" y="190" width="414.667" height="300" preserveAspectRatio="xMidYMid meet">
+  <!-- Concept C: The Storage Iris ("Concentric Radial Scanner - RECOMMENDED") -->
+  <!-- Central Storage Nucleus -->
+  <circle cx="100" cy="100" r="16" fill="currentColor"/>
+  <!-- Concentric Layered Arcs with Precision Gaps -->
+  <g fill="none" stroke="currentColor" stroke-linecap="round">
+    <!-- Inner Partition Ring (R=44, Stroke=14) -->
+    <path d="M 84.95 141.35 A 44 44 0 1 1 128.28 66.29" stroke-width="14"/>
+    <path d="M 138.11 78.00 A 44 44 0 0 1 100.00 144.00" stroke-width="14"/>
+    <!-- Outer Category Sectors (R=74, Stroke=16) -->
+    <!-- Primary Sector (Bottom-Left) -->
+    <path d="M 100.00 174.00 A 74 74 0 0 1 30.46 74.69" stroke-width="16"/>
+    <!-- Secondary Sector (Top-Left) -->
+    <path d="M 39.38 57.56 A 74 74 0 0 1 152.33 47.67" stroke-width="16"/>
+    <!-- Tertiary Sector (Top-Right) -->
+    <path d="M 164.09 63.00 A 74 74 0 0 1 167.07 131.27" stroke-width="16"/>
+  </g>
+</svg>
+</g><g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 140" x="1095.33" y="514" width="414.667" height="120" preserveAspectRatio="xMidYMid meet">
+  <!-- Concept C Lockup: The Storage Iris (Recommended) -->
+  <g transform="translate(18, 16) scale(0.54)">
+    <circle cx="100" cy="100" r="16" fill="currentColor"/>
+    <g fill="none" stroke="currentColor" stroke-linecap="round">
+      <path d="M 84.95 141.35 A 44 44 0 1 1 128.28 66.29" stroke-width="14"/>
+      <path d="M 138.11 78.00 A 44 44 0 0 1 100.00 144.00" stroke-width="14"/>
+      <path d="M 100.00 174.00 A 74 74 0 0 1 30.46 74.69" stroke-width="16"/>
+      <path d="M 39.38 57.56 A 74 74 0 0 1 152.33 47.67" stroke-width="16"/>
+      <path d="M 164.09 63.00 A 74 74 0 0 1 167.07 131.27" stroke-width="16"/>
+    </g>
+  </g>
+  <text x="145" y="85" fill="currentColor" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif" font-size="52" letter-spacing="-1.5">
+    <tspan font-weight="400">droid</tspan><tspan font-weight="700">tree</tspan>
+  </text>
+</svg>
+</g><g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" x="1095.33" y="660" width="64" height="64" preserveAspectRatio="xMidYMid meet">
+  <!-- Concept C: The Storage Iris ("Concentric Radial Scanner - RECOMMENDED") -->
+  <!-- Central Storage Nucleus -->
+  <circle cx="100" cy="100" r="16" fill="currentColor"/>
+  <!-- Concentric Layered Arcs with Precision Gaps -->
+  <g fill="none" stroke="currentColor" stroke-linecap="round">
+    <!-- Inner Partition Ring (R=44, Stroke=14) -->
+    <path d="M 84.95 141.35 A 44 44 0 1 1 128.28 66.29" stroke-width="14"/>
+    <path d="M 138.11 78.00 A 44 44 0 0 1 100.00 144.00" stroke-width="14"/>
+    <!-- Outer Category Sectors (R=74, Stroke=16) -->
+    <!-- Primary Sector (Bottom-Left) -->
+    <path d="M 100.00 174.00 A 74 74 0 0 1 30.46 74.69" stroke-width="16"/>
+    <!-- Secondary Sector (Top-Left) -->
+    <path d="M 39.38 57.56 A 74 74 0 0 1 152.33 47.67" stroke-width="16"/>
+    <!-- Tertiary Sector (Top-Right) -->
+    <path d="M 164.09 63.00 A 74 74 0 0 1 167.07 131.27" stroke-width="16"/>
+  </g>
+</svg>
+</g><text x="1127.33" y="744" font-family="system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" fill="#8a8a8a" text-anchor="middle">64px</text><g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" x="1185.33" y="692" width="32" height="32" preserveAspectRatio="xMidYMid meet">
+  <!-- Concept C: The Storage Iris ("Concentric Radial Scanner - RECOMMENDED") -->
+  <!-- Central Storage Nucleus -->
+  <circle cx="100" cy="100" r="16" fill="currentColor"/>
+  <!-- Concentric Layered Arcs with Precision Gaps -->
+  <g fill="none" stroke="currentColor" stroke-linecap="round">
+    <!-- Inner Partition Ring (R=44, Stroke=14) -->
+    <path d="M 84.95 141.35 A 44 44 0 1 1 128.28 66.29" stroke-width="14"/>
+    <path d="M 138.11 78.00 A 44 44 0 0 1 100.00 144.00" stroke-width="14"/>
+    <!-- Outer Category Sectors (R=74, Stroke=16) -->
+    <!-- Primary Sector (Bottom-Left) -->
+    <path d="M 100.00 174.00 A 74 74 0 0 1 30.46 74.69" stroke-width="16"/>
+    <!-- Secondary Sector (Top-Left) -->
+    <path d="M 39.38 57.56 A 74 74 0 0 1 152.33 47.67" stroke-width="16"/>
+    <!-- Tertiary Sector (Top-Right) -->
+    <path d="M 164.09 63.00 A 74 74 0 0 1 167.07 131.27" stroke-width="16"/>
+  </g>
+</svg>
+</g><text x="1201.33" y="744" font-family="system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" fill="#8a8a8a" text-anchor="middle">32px</text><g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" x="1243.33" y="708" width="16" height="16" preserveAspectRatio="xMidYMid meet">
+  <!-- Concept C: The Storage Iris ("Concentric Radial Scanner - RECOMMENDED") -->
+  <!-- Central Storage Nucleus -->
+  <circle cx="100" cy="100" r="16" fill="currentColor"/>
+  <!-- Concentric Layered Arcs with Precision Gaps -->
+  <g fill="none" stroke="currentColor" stroke-linecap="round">
+    <!-- Inner Partition Ring (R=44, Stroke=14) -->
+    <path d="M 84.95 141.35 A 44 44 0 1 1 128.28 66.29" stroke-width="14"/>
+    <path d="M 138.11 78.00 A 44 44 0 0 1 100.00 144.00" stroke-width="14"/>
+    <!-- Outer Category Sectors (R=74, Stroke=16) -->
+    <!-- Primary Sector (Bottom-Left) -->
+    <path d="M 100.00 174.00 A 74 74 0 0 1 30.46 74.69" stroke-width="16"/>
+    <!-- Secondary Sector (Top-Left) -->
+    <path d="M 39.38 57.56 A 74 74 0 0 1 152.33 47.67" stroke-width="16"/>
+    <!-- Tertiary Sector (Top-Right) -->
+    <path d="M 164.09 63.00 A 74 74 0 0 1 167.07 131.27" stroke-width="16"/>
+  </g>
+</svg>
+</g><text x="1251.33" y="744" font-family="system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12" fill="#8a8a8a" text-anchor="middle">16px</text><text x="1095.3333333333335" y="780" font-family="system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="26" font-weight="700" fill="#161616">C · The Storage Iris</text><text x="1095.3333333333335" y="814" font-family="system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="19" fill="#555">Concentric radial scanner: DaisyDisk disk</text><text x="1095.3333333333335" y="840" font-family="system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="19" fill="#555">sectors with an active aperture.</text></svg>

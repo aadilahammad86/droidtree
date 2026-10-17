@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Concept B: The Synthetic Arbor ("The Hierarchical Node-Tree") -->
+  <!-- Main Trunk and Branches -->
+  <g fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Central Trunk -->
+    <path d="M 100 166 L 100 114"/>
+    <!-- Primary Bifurcations -->
+    <path d="M 100 114 L 66 84"/>
+    <path d="M 100 114 L 134 84"/>
+    <!-- Secondary Branches -->
+    <path d="M 66 84 L 46 54"/>
+    <path d="M 66 84 L 84 50"/>
+    <path d="M 134 84 L 116 50"/>
+    <path d="M 134 84 L 154 54"/>
+  </g>
+  <!-- Node Terminal Discs / Data Blobs -->
+  <g fill="currentColor">
+    <circle cx="100" cy="166" r="10"/>
+    <circle cx="46" cy="50" r="14"/>
+    <circle cx="84" cy="46" r="16"/>
+    <circle cx="116" cy="46" r="16"/>
+    <circle cx="154" cy="50" r="14"/>
+    <circle cx="66" cy="84" r="7"/>
+    <circle cx="134" cy="84" r="7"/>
+  </g>
+</svg>

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Concept E: The Vision Glass Squircle ("macOS / VisionOS Layered Depth") -->
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="e-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E2433"/>
+      <stop offset="50%" stop-color="#131722"/>
+      <stop offset="100%" stop-color="#0B0D14"/>
+    </linearGradient>
+
+    <!-- Glass Shimmer Gradient -->
+    <linearGradient id="e-glass-shimmer" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.03"/>
+    </linearGradient>
+
+    <!-- Primary Accent Glow -->
+    <radialGradient id="e-core-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#60A5FA" stop-opacity="0.9"/>
+      <stop offset="60%" stop-color="#3B82F6" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#1D4ED8" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Drop Shadow for floating elements -->
+    <filter id="e-drop-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <!-- Base Apple Squircle with Subtle Rim -->
+  <rect x="16" y="16" width="168" height="168" rx="46" fill="url(#e-bg)" stroke="#FFFFFF" stroke-opacity="0.14" stroke-width="1.2"/>
+
+  <!-- Treemap Layer: Translucent Frosted Glass Tiles -->
+  <g filter="url(#e-drop-shadow)">
+    <!-- Vertical Spine Tile (System) -->
+    <rect x="36" y="36" width="40" height="128" rx="14" fill="#3B82F6" fill-opacity="0.22" stroke="url(#e-glass-shimmer)" stroke-width="1.2"/>
+    <!-- Top Right Tile (Media / Large Data) -->
+    <rect x="84" y="36" width="80" height="60" rx="14" fill="#10B981" fill-opacity="0.22" stroke="url(#e-glass-shimmer)" stroke-width="1.2"/>
+    <!-- Bottom Right Tile 1 (Apps) -->
+    <rect x="84" y="104" width="36" height="60" rx="12" fill="#F59E0B" fill-opacity="0.22" stroke="url(#e-glass-shimmer)" stroke-width="1.2"/>
+    <!-- Bottom Right Tile 2 (Cache / Documents) -->
+    <rect x="128" y="104" width="36" height="60" rx="12" fill="#8B5CF6" fill-opacity="0.22" stroke="url(#e-glass-shimmer)" stroke-width="1.2"/>
+  </g>
+
+  <!-- Ambient Light Reflection on Top Left Shoulder -->
+  <path d="M 36 48 C 36 38 42 36 54 36 L 146 36 C 158 36 164 38 164 48" fill="none" stroke="#FFFFFF" stroke-opacity="0.22" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Floating Optical Core / Scanner Pulse Node -->
+  <circle cx="104" cy="100" r="28" fill="url(#e-core-glow)" filter="url(#e-drop-shadow)"/>
+  <circle cx="104" cy="100" r="10" fill="#FFFFFF" fill-opacity="0.95"/>
+  <circle cx="104" cy="100" r="16" fill="none" stroke="#60A5FA" stroke-width="2.5" stroke-dasharray="4 3"/>
+</svg>
