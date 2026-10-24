@@ -4,7 +4,6 @@ import android.content.Context
 import android.media.MediaScannerConnection
 import android.os.Build
 import android.os.Environment
-import android.provider.MediaStore
 import com.droidtree.app.core.error.DataError
 import com.droidtree.app.core.model.FileNode
 import com.droidtree.app.core.model.ScanState
@@ -36,7 +35,7 @@ class StorageRepositoryImpl(
 
     override suspend fun getQuickSummary(): Result<StorageSummary> = withContext(Dispatchers.IO) {
         try {
-            // 1. Try to load previously cached full disk scan
+            // 1. Return previously cached full disk scan if available
             val cached = preferencesManager.getCachedSummary()
             if (cached != null && cached.scannedFiles > 0) {
                 return@withContext Result.success(cached)
@@ -46,21 +45,14 @@ class StorageRepositoryImpl(
             val total = root.totalSpace
             val free = root.freeSpace
 
-            // 2. Query MediaStore for fast real file count & categorized storage
-            val mediaSummary = queryMediaStoreSummary(rootTotal = total, rootFree = free)
-            if (mediaSummary != null && mediaSummary.scannedFiles > 0) {
-                preferencesManager.saveCachedSummary(mediaSummary)
-                return@withContext Result.success(mediaSummary)
-            }
-
-            // 3. Fallback when MediaStore returned no files or permissions not yet granted
-            val used = (total - free).coerceAtLeast(0L)
+            // 2. If un-scanned, return clean baseline with 0 used bytes and 0 files (no fake partition percentages)
             val summary = StorageSummary(
                 totalBytes = total,
-                usedBytes = used,
+                usedBytes = 0L,
                 freeBytes = free,
                 scannedFiles = 0,
-                categoryBreakdown = if (used > 0) mapOf(StorageCategory.SYSTEM to used) else emptyMap()
+                scannedFolders = 0,
+                categoryBreakdown = emptyMap()
             )
             Result.success(summary)
         } catch (e: SecurityException) {
@@ -69,66 +61,6 @@ class StorageRepositoryImpl(
             Result.failure(DataError.LocalIo(e))
         } catch (e: Exception) {
             Result.failure(DataError.StorageUnavailable(e.localizedMessage ?: "Storage query failed"))
-        }
-    }
-
-    private fun queryMediaStoreSummary(rootTotal: Long, rootFree: Long): StorageSummary? {
-        return try {
-            val resolver = context.contentResolver
-            val filesUri = MediaStore.Files.getContentUri("external")
-            val projection = arrayOf(
-                MediaStore.Files.FileColumns.SIZE,
-                MediaStore.Files.FileColumns.MEDIA_TYPE,
-                MediaStore.MediaColumns.DISPLAY_NAME
-            )
-
-            val selection = "${MediaStore.Files.FileColumns.SIZE} > 0"
-            var totalFiles = 0
-            var totalBytes = 0L
-            val categoryMap = mutableMapOf<StorageCategory, Long>()
-
-            val cursor = resolver.query(filesUri, projection, selection, null, null) ?: return null
-            cursor.use {
-                val sizeCol = it.getColumnIndex(MediaStore.Files.FileColumns.SIZE)
-                val typeCol = it.getColumnIndex(MediaStore.Files.FileColumns.MEDIA_TYPE)
-                val nameCol = it.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME)
-
-                if (sizeCol < 0) return null
-
-                while (it.moveToNext()) {
-                    val size = it.getLong(sizeCol)
-                    if (size <= 0) continue
-                    totalFiles++
-                    totalBytes += size
-
-                    val mediaType = if (typeCol >= 0) it.getInt(typeCol) else MediaStore.Files.FileColumns.MEDIA_TYPE_NONE
-                    val category = when (mediaType) {
-                        MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE -> StorageCategory.IMAGES
-                        MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO -> StorageCategory.VIDEOS
-                        MediaStore.Files.FileColumns.MEDIA_TYPE_AUDIO -> StorageCategory.AUDIO
-                        MediaStore.Files.FileColumns.MEDIA_TYPE_DOCUMENT -> StorageCategory.DOCUMENTS
-                        else -> {
-                            val name = if (nameCol >= 0) it.getString(nameCol) else null
-                            val ext = name?.substringAfterLast('.', "") ?: ""
-                            StorageCategory.fromExtension(ext)
-                        }
-                    }
-                    categoryMap[category] = (categoryMap[category] ?: 0L) + size
-                }
-            }
-
-            if (totalFiles == 0) return null
-
-            StorageSummary(
-                totalBytes = rootTotal.coerceAtLeast(totalBytes),
-                usedBytes = totalBytes,
-                freeBytes = rootFree,
-                scannedFiles = totalFiles,
-                scannedFolders = 0,
-                categoryBreakdown = categoryMap
-            )
-        } catch (_: Exception) {
-            null
         }
     }
 

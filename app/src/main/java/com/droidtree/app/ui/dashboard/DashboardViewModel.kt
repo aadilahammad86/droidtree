@@ -1,5 +1,6 @@
 package com.droidtree.app.ui.dashboard
 
+import android.os.Build
 import android.os.Environment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -55,11 +56,23 @@ class DashboardViewModel(
         }
     }
 
+    private fun canAccessStorage(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            Environment.isExternalStorageManager()
+        } else {
+            Environment.getExternalStorageDirectory().canRead()
+        }
+    }
+
     private fun loadQuickSummary() {
         viewModelScope.launch {
             repository.getQuickSummary()
                 .onSuccess { summary ->
                     _uiState.update { it.copy(summary = summary) }
+                    // If no scan has been performed yet and storage permission is available, auto-scan to get real values immediately
+                    if (summary.scannedFiles == 0 && canAccessStorage() && !_uiState.value.isScanning) {
+                        onStartScanClick()
+                    }
                 }
                 .onFailure { error ->
                     _uiState.update { it.copy(errorMessage = error.localizedMessage) }
@@ -68,8 +81,12 @@ class DashboardViewModel(
     }
 
     fun refreshQuickSummary() {
-        if (!_uiState.value.isScanning && _uiState.value.summary.scannedFiles == 0) {
-            loadQuickSummary()
+        if (!_uiState.value.isScanning) {
+            if (_uiState.value.summary.scannedFiles == 0 && canAccessStorage()) {
+                onStartScanClick()
+            } else {
+                loadQuickSummary()
+            }
         }
     }
 
