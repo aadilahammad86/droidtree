@@ -19,8 +19,8 @@ import org.koin.dsl.module
  */
 val appModule = module {
     single { FastStorageScanner() }
-    single<StorageRepository> { StorageRepositoryImpl(get(), androidContext()) }
     single { PreferencesManager(androidContext()) }
+    single<StorageRepository> { StorageRepositoryImpl(get(), androidContext(), get()) }
     single { StorageReportPdfExporter() }
     single { ExportApiService.create() }
 

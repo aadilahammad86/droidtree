@@ -19,6 +19,7 @@ data class StorageSummary(
     val formattedTotal: String get() = FileNode.formatByteSize(totalBytes)
     val formattedUsed: String get() = FileNode.formatByteSize(usedBytes)
     val formattedFree: String get() = FileNode.formatByteSize(freeBytes)
+    val formattedScannedFiles: String get() = java.text.NumberFormat.getNumberInstance().format(scannedFiles)
 }
 
 /**

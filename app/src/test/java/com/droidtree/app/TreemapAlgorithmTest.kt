@@ -4,6 +4,9 @@ import androidx.compose.ui.geometry.Rect
 import com.droidtree.app.core.designsystem.components.computeSquarifiedTreemap
 import com.droidtree.app.core.model.FileNode
 import com.droidtree.app.core.model.StorageCategory
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -52,5 +55,43 @@ class TreemapAlgorithmTest {
         assertEquals(3, tiles.size)
         // Largest item must occupy the largest area
         assertTrue(tiles[0].bounds.width * tiles[0].bounds.height >= tiles[1].bounds.width * tiles[1].bounds.height)
+    }
+
+    @Test
+    fun `storageSummary calculates correct percentage and formatted strings`() {
+        val summary = com.droidtree.app.core.model.StorageSummary(
+            totalBytes = 100_000_000_000L,
+            usedBytes = 25_000_000_000L,
+            freeBytes = 75_000_000_000L,
+            scannedFiles = 12450,
+            scannedFolders = 120
+        )
+
+        assertEquals(0.25f, summary.usedPercentage, 0.001f)
+        assertEquals("12,450", summary.formattedScannedFiles)
+    }
+
+    @Test
+    fun `cachedStorageSummary serializes and deserializes accurately`() {
+        val cached = com.droidtree.app.data.datastore.CachedStorageSummary(
+            totalBytes = 64000000000L,
+            usedBytes = 16000000000L,
+            freeBytes = 48000000000L,
+            scannedFiles = 5210,
+            scannedFolders = 42,
+            categoryBreakdown = mapOf(
+                "IMAGES" to 8000000000L,
+                "VIDEOS" to 6000000000L
+            )
+        )
+
+        val json = kotlinx.serialization.json.Json { ignoreUnknownKeys = true }
+        val encoded = json.encodeToString(cached)
+        val decoded = json.decodeFromString<com.droidtree.app.data.datastore.CachedStorageSummary>(encoded)
+
+        assertEquals(cached.totalBytes, decoded.totalBytes)
+        assertEquals(cached.usedBytes, decoded.usedBytes)
+        assertEquals(cached.scannedFiles, decoded.scannedFiles)
+        assertEquals(8000000000L, decoded.categoryBreakdown["IMAGES"])
     }
 }

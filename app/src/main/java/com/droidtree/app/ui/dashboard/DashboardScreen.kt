@@ -87,6 +87,12 @@ fun DashboardScreen(
         }
     }
 
+    LaunchedEffect(lifecycle) {
+        lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+            viewModel.refreshQuickSummary()
+        }
+    }
+
     DashboardContent(
         uiState = uiState,
         actions = viewModel
@@ -282,7 +288,7 @@ fun DashboardContent(
                         color = MaterialTheme.colorScheme.onBackground
                     )
                     Text(
-                        text = "${uiState.summary.scannedFiles} items",
+                        text = "${uiState.summary.formattedScannedFiles} items",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )

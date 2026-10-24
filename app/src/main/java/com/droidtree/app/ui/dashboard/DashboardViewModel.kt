@@ -67,6 +67,12 @@ class DashboardViewModel(
         }
     }
 
+    fun refreshQuickSummary() {
+        if (!_uiState.value.isScanning && _uiState.value.summary.scannedFiles == 0) {
+            loadQuickSummary()
+        }
+    }
+
     override fun onStartScanClick() {
         viewModelScope.launch {
             val includeHidden = preferencesManager.includeHiddenFiles.first()
@@ -91,6 +97,7 @@ class DashboardViewModel(
                                 scanProgressText = "Scan Complete"
                             )
                         }
+                        preferencesManager.saveCachedSummary(state.summary)
                         _effects.trySend(DashboardEffect.ShowToast("Storage index built: ${state.summary.scannedFiles} files"))
                     }
                     is ScanState.Error -> {
